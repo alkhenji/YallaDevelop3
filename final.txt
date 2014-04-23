@@ -1,0 +1,11 @@
+- Home Page Slider Images
+- Explore (image sizes), pagination
+- Browse Users (image sizes), pagination
+-- Closer names to the images
+
+- Top 10: fix borders:
+-- Header fix javascript
+
+- Footer:
+-- Stay Tuned
+-- 

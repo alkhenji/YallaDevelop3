@@ -1,0 +1,72 @@
+{% include "yalladevelop/header.html" %}
+
+<h1 class="text-center">Track projects</h1>
+
+
+<div class="row">
+	<div class="secHeader">
+		
+		{% if not is_company %}		
+			<legend>My Projects: </legend>
+		
+			{% for project in my_projects %}
+				<div class="col-md-4">
+					<div class="well">
+						<p class="text-center"><strong>{{project.name}}</strong></p>
+						<div id="explore_image" style="background-image: url({% url 'getProjectPicture' project.id %})"></div><br/>
+						Project Progress:
+						<div class="progress progress-striped active">
+							<div class="progress-bar" style="width: {{progress}}%;">{{progress}}% Completed</div>
+						</div>
+						<p class="text-center"><a class="btn btn-info" href="/project/{{project.id}}">View Project</a></p>
+					</div>
+					<br/><br/>					
+				</div>
+			{% endfor %}
+			
+			<legend>Projects I'm helping: </legend>
+			
+			{% if helping %}		
+				{% for project in helping %}
+					<div class="col-md-4">
+						<div class="well">
+							<p class="text-center"><strong>{{project.name}}</strong></p>
+							<div id="explore_image" style="background-image: url({% url 'getProjectPicture' project.id %})"></div><br/>
+							Project Progress:
+							<div class="progress progress-striped active">
+								<div class="progress-bar" style="width: {{progress}}%;">{{progress}}% Completed</div>
+							</div>
+							<p class="text-center"><a class="btn btn-info" href="/project/{{project.id}}">View Project</a></p>
+						</div>
+						<br/><br/>					
+					</div>
+				{% endfor %}
+			{% else %}
+				<p>You did not help any one yet. Start helping people in their projects and earn points to attract potential employers!</p>
+			{% endif %}
+		
+		{% endif %}
+		
+		<legend>Projects I'm funding: </legend>
+	
+		{% if funding %}	
+			{% for project in funding %}
+				<div class="col-md-4">
+					<div class="well">
+						<p class="text-center"><strong>{{project.name}}</strong></p>
+						<div id="explore_image" style="background-image: url({% url 'getProjectPicture' project.id %})"></div><br/>
+						Project Progress:
+						<div class="progress progress-striped active">
+							<div class="progress-bar" style="width: {{progress}}%;">{{progress}}% Completed</div>
+						</div>
+						<p class="text-center"><a class="btn btn-info" href="/project/{{project.id}}">View Project</a></p>
+					</div>
+					<br/><br/>					
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>You did not fund any project yet.</p>
+		{% endif %}
+</div></div>
+
+{% include "yalladevelop/footer.html" %}

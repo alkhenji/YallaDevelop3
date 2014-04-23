@@ -1,0 +1,53 @@
+{% include "yalladevelop/header.html" %}
+
+<div class="row">
+          <div class="col-md-12">
+            <div class="secHeader">
+              <h1 class="text-center">Browse Projects</h1>
+              <p class="text-center">
+
+
+<p> Projects are the core of YallaDevelop. The more we host, the more fund we raise the more the product owners and dreams are deployed. <br/>We aim to be the Middle East's number 1 technology project host and community. We grow bigger with every dream. Here is our hosted projects: </p>
+
+
+      {% for project in projects %}
+		<div class="col-md-4">						
+			<div class="well">
+				<p class="text-center"><strong>{{project.name}}</strong></p>
+				<div id="explore_image" style="background-image: url({% url 'getProjectPicture' project.id %})"></div>
+				<p class="text-center"><i class="fa fa-heart" style="color:#D00000;"></i> Likes: {{project.likes}}<br/></p>
+				<p class="text-center"><a class="btn btn-info" href="/project/{{project.id}}">Visit Project</a></p>
+			</div>
+			<br/><br/>					
+		</div>
+		
+		{% endfor %}
+
+<div class="text-center">
+	<ul class="pagination">
+		{% if projects.has_previous %}
+			<li><a href="?page={{ projects.previous_page_number }}">«</a></li>
+		{% else %}
+			<li class="disabled"><a href="#">«</a></li>
+		{% endif %}
+		{% for i in paginator.page_range %}
+			{% if forloop.counter == projects.number %}
+				<li class="active"><a href="/allprojects/?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+			{% else %}
+				<li><a href="/allprojects/?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+			{% endif %}
+		{% endfor %}
+		{% if projects.has_next %}
+			<li><a href="?page={{ projects.next_page_number }}">»</a></li>
+		{% else %}
+			<li class="disabled"><a href="#">»</a></li>
+		{% endif %}	
+	</ul>
+</div>
+
+</p>
+</div>
+</div>
+</div>
+
+{% include "yalladevelop/footer.html" %}

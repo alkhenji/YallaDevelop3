@@ -1,0 +1,16 @@
+{% include "yalladevelop/header.html" %}
+
+<h1 style="text-center">Add Project:</h1>
+
+<div class="jumbotron">
+		<form action="/addproject/" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_table }}
+			<br>
+			<input type="submit" value="Submit" class="btn btn-info"/>
+			</form>
+		</form>
+	<br/>
+</div>
+
+{% include "yalladevelop/footer.html" %}

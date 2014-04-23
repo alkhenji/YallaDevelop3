@@ -1,0 +1,69 @@
+{% include "yalladevelop/header.html" %}
+{% load staticfiles %}
+
+
+<legend><h1>{{userProfile.name}}'s Profile</h1></legend>
+
+
+	
+	<div class="row">		
+		<div class="col-md-6">
+			<img src="{% url 'getProfilePicture' userAccount.id %}" style="max-width:500px;max-height:280px;">
+		</div>
+			
+		<div class="col-md-6">
+			<div class="well">
+				<h4>
+					<strong>Username:</strong> {{userAccount.username}}<br/><br/>
+					<strong>Name:</strong> {{userProfile.name}}<br/><br/>
+					<strong>Email: </strong>{{userAccount.email}}<br/><br/>
+					<strong>Skills: </strong>{{userProfile.skill.count}}<br/><br/>
+					<strong>Points: </strong>{{userProfile.points}}<br/>
+				</h4>
+				<a class="btn btn-info" value="Go Back" onClick="javascript:history.go(-1);">Go Back</a>
+				{% if my_profile %}
+					<a class="btn btn-info" href="/profile_settings">Edit Profile</a>
+					<a class="btn btn-info" href="/track/">Track My Projects</a> </td>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="text-center">
+			<h4>
+				{% if skills %}
+					<strong>Skills:</strong><br/><br/>
+					{% for s in skills%}
+						|
+						{% if s.name == "Python" %}
+							<i class="icon-python" style="font-size: 2em;"></i> {{s.name}} | 
+						{% elif s.name == "Java" %}
+							<i class="icon-java" style="font-size: 2em;"></i> {{s.name}} | 
+						{% elif s.name == "C" %}
+							<i class="icon-c" style="font-size: 2em;"></i> {{s.name}} | 
+						{% elif s.name == "Ruby" %}
+							<i class="icon-ruby-on-rails-alt" style="font-size: 2em;"></i> {{s.name}} | 
+						{%elif s.name == "HTML" %}
+							<i class="icon-html" style="font-size: 2em;"></i> {{s.name}} | 
+						{%elif s.name == "PHP" %}
+							<i class="icon-php" style="font-size: 2em;"></i> {{s.name}} | 
+						{%elif s.name == "ASP" %}
+							<i class="icon-aws" style="font-size: 2em;"></i> {{s.name}} | 
+						{%elif s.name == "Perl" %}
+							<i class="icon-perl" style="font-size: 2em;"></i> {{s.name}} |
+						{%elif s.name == "Adobe" %}
+							<i class="icon-splatter" style="font-size: 2em;"></i> {{s.name}} |
+						{%elif s.name == "SQL" %}
+							<i class="icon-database" style="font-size: 2em;"></i> {{s.name}} |
+						{%else%}
+							{{ s.name }} |
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</h4>
+		</div>
+	</div>
+
+{% include "yalladevelop/footer.html" %}

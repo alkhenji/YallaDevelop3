@@ -1,0 +1,138 @@
+{% include "yalladevelop/header.html" %}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="secHeader">
+			<h1 class="text-center">Ranking</h1>
+			<p class="text-center">
+				<div class="tabbable full-width-tabs">
+					<br/><br/>
+            		<ul class="nav nav-tabs">
+		                <li class="active"><a href="#tab-one" data-toggle="tab"><i class="fa fa-group"></i> Top 10 Users</a></li>
+		                <li><a href="#tab-two" data-toggle="tab"><i class="fa fa-suitcase"></i> Top 10 Companies</a></li>
+		                <li><a href="#tab-three" data-toggle="tab"><i class="fa fa-cogs"></i> Top 10 projects</a></li>
+		            </ul>
+		
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab-one">
+							<br/>
+							
+							<p> Our community is collaborative and competitive too! Here are the most active users. <br/>
+								In order to increase the competetion for developers, users that complete projects get points.<br/>
+								This doesn't mean that they are the best, but definitely the most active!</p>
+								
+							{% if top_users %}
+								<div class="row">
+									<strong>
+									<div class="col-md-1">Rank</div>
+									<div class="col-md-3">Picture</div>
+									<div class="col-md-4">Name</div>
+									<div class="col-md-2">Skills</div>
+									<div class="col-md-2">Score</div>
+									</strong>
+								</div>							
+							
+								{% for u in top_users %}
+									<div class="row"><div class="custom-well">
+										<div class="text-center"><div class="col-md-1"><br/>{{forloop.counter}}</div></div>
+										<div class="col-md-3"><div id="ranking_image" style="background-background-position:0% 20%; background-image: url({% url 'getProfilePicture' u.user.id %})"></div></div>
+										<div class="col-md-4"><br/><a href="/profile/{{u.user.id}}">{{u}}</a></div>
+										<div class="col-md-2"><br/>{{u.skill.count}}</div>
+										<div class="col-md-2"><br/>{{u.points}}</div>
+									</div></div>
+								{% endfor %}
+														
+							{% else %}
+								<h6> No users made it to the high scores yet. </h6>
+							{% endif %}
+						</div>
+						
+						<div class="tab-pane" id="tab-two">
+							<br/>
+							<p> Our great partners companies fund the projects. Here are the most funding providers: </p>
+							
+							{% if top_companies %}
+							
+								<div class="row">
+									<strong>
+									<div class="col-md-1">Rank</div>
+									<div class="col-md-3">Logo</div>
+									<div class="col-md-4">Name</div>
+									<div class="col-md-4">Total Funds</div>
+									</strong>
+								</div>							
+							
+								{% for u in top_companies %}
+									<div class="row"><div class="custom-well">
+										<div class="text-center"><div class="col-md-1"><br/>{{forloop.counter}}</div></div>
+										<div class="col-md-3"><div id="company_ranking_image" style="background-background-position:0% 20%; background-image: url({% url 'getProfilePicture' u.user.id %})"></div></div>
+										<div class="col-md-4"><br/><a href="/profile/{{u.user.id}}">{{u}}</a></div>
+										<div class="col-md-4"><br/>{{u.points}}</div>
+									</div></div>
+								{% endfor %}
+							{% else %}
+								<h6> No users made it to the high scores yet. </h6>
+							{% endif %}
+						</div>
+						
+						<div class="tab-pane" id="tab-three">
+							<br/>
+							<p> Great ideas derive great projects, here are the top ten projects that YallaDevelop visitors liked: </p>
+							
+							{% if top_projects %}
+														
+								<div class="row">
+									<strong>
+									<div class="col-md-1">Rank</div>
+									<div class="col-md-3">Picture</div>
+									<div class="col-md-4">Name</div>
+									<div class="col-md-2">Donations</div>
+									<div class="col-md-2">Likes</div>
+									</strong>
+								</div>						
+							
+								{% for p in top_projects %}
+									<div class="row"><div class="custom-well">
+										<div class="text-center"><div class="col-md-1"><br/>{{forloop.counter}}</div></div>
+										<div class="col-md-3"><div id="ranking_image" style="background-background-position:0% 20%; background-image: url({% url 'getProjectPicture' p.id %})"></div></div>
+										<div class="col-md-4"><br/><a href="/project/{{p.id}}">{{p.name}}</a></div>
+										<div class="col-md-2"><br/>${{p.money_collected}}</div>
+										<div class="col-md-2"><br/>{{p.likes}}</div>
+									</div></div>
+								{% endfor %}
+							
+							
+								
+							{% else %}
+								<h6> No users made it to the high scores yet. </h6>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+
+</p>
+</div>
+</div>
+</div>
+
+
+<br> <br><br> <br>
+
+{% include "yalladevelop/footer.html" %}
+
+{%comment%}
+<div class="col-md-4">
+	{{forloop.counter}}
+	<img src="{% url 'getProfilePicture' u.user.id %}" width="50" height="50"/><a href="/profile/{{u.user.id}}"> </div>
+		<div class="col-md-4">{{u.name}}  &nbsp; &nbsp;  </div>
+		<div class="col-md-4">Score: {{u.points}} </a> </div><br/>
+		<br/>
+		<br/>
+		
+		
+		{% for p in top_projects %}
+			<div class="hopetherectangleworks2">{{forloop.counter}} &nbsp; <img  src="{% url 'getProjectPicture' p.id %}"  width="50" height="50"><a href="/project/{{p.id}}"> {{p.name}}  &nbsp; &nbsp; <i class="fa fa-heart" style="color:#D00000 ;"></i> {{p.likes}} </a> </div>
+		{% endfor %}
+		
+{%endcomment%}
