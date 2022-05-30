@@ -2,7 +2,7 @@
 
 <center><h1>Login Form</h1></center>
 <!--
-<form method="post" action="{% url 'django.contrib.auth.views.login'  %}">
+<form method="post" action="{% url 'login' %}">
 	<h4> Please login below, or create an account if you don't have one </h4>
 	<p><label for='username'>Username</label><input type="text" name="username"/></p>
 	<p><label for='password'>Password</label><input type="password" name="password"/></p>
@@ -11,7 +11,7 @@
 </form>
 -->
 <div class="jumbotron">
-	<form method="post" action="{% url 'django.contrib.auth.views.login'  %}" class="form-horizontal">
+	<form method="post" action="{% url 'login' %}" class="form-horizontal">
 		<fieldset>
 			{% if form.errors %}
 				<p>Your username and password don't match our records. Please try again.</p>

@@ -1,9 +1,9 @@
-from django.conf.urls import patterns, include, url
+from django.urls import include, path
 from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-	url(r'^', include('yalladevelop.urls')),
-	url(r'^admin/', include(admin.site.urls)),
-)
+urlpatterns = [
+               path('', include('yalladevelop.urls')),
+               path('admin/', admin.site.urls),
+               ]

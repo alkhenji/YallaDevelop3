@@ -1,60 +1,61 @@
 ''' This will be the URL Dispatcher, i.e., the file that will be in charge of
 linking the pages to the controller '''
 
-from django.conf.urls import patterns, url
-from django.contrib.auth import authenticate, login
+from django.urls import path
+from django.contrib.auth import views as auth_views
 from yalladevelop import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns = patterns('',
-	url(r'^$', views.index, name='index'),
-	url(r'^signup/$', views.signup_user, name="signup"),
-	url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'yalladevelop/login.html'}, name="login"),
-	url(r'^logout/$', views.logout_user, name="logout"),
-	url(r'^project/(?P<project_id>\d+)/$', views.showProject, name='showProject'),
-	url(r'^profile/(?P<profile_id>\d+)/$', views.showProfile, name='showProfile'),
-	url(r'^profile/$', views.showProfile, name='showProfile'),
-	url(r'^addproject/$', views.addProject, name='addProject'),
-	url(r'^forgotpassword/$', views.forgotPassword, name='forgotPassword'),
-	url(r'^profile_settings/$', views.profileSettings, name='profileSettings'),
-	
-	url(r'^userorcompany/$', views.userorcompany, name="userorcompany"),
-	url(r'^user-signup/$', views.signup_user, name="signup_user"),
-	url(r'^track/$', views.track, name="track"),
-	url(r'^company-signup/$', views.signup_company, name="signup_company"),	
-	
-	url(r'^search_skills/$', views.search_skills, name="search_skills"),	
-	url(r'^search_skills/(?P<skill_id>\d+)/$', views.search_skills, name="search_skills"),	
-	
-	# Functions dispatcher
-	url(r'^project/(?P<project_id>\d+)/likeProject$', views.likeProject, name='likeProject'),
-	url(r'^project/(?P<project_id>\d+)/helpProject$', views.helpProject, name='helpProject'),
-	url(r'^project/(?P<project_id>\d+)/donate/$', views.donate, name='donate'),
-	url(r'^project/(?P<project_id>\d+)/promote/$', views.promote, name='promote'),
-	
-	url(r'^project/(?P<project_id>\d+)/edit$', views.editProject, name='editProject'),
-	
-	url(r'^post_comment/$', views.postComment, name='postComment'),
-	url(r'^user_upload/$', views.user_upload, name='user_upload'),
-	
-	# Static Pages Dispatcher
-	url(r'^about/$', views.about, name="about"),
-	url(r'^contact/$', views.contact, name="contact"),
-	url(r'^explore/$', views.explore, name="explore"),
-	url(r'^allprojects/$', views.allprojects, name="allprojects"),
-	url(r'^allusers/$', views.allusers, name="allusers"),
-	url(r'^allcompanies/$', views.allcompanies, name="allcompanies"),
-	url(r'^faq/$', views.faq, name="faq"),
-	url(r'^help/$', views.help, name="help"),
-	url(r'^privacy/$', views.privacy, name="privacy"),
-	url(r'^sitemap/$', views.sitemap, name="sitemap"),
-	url(r'^terms/$', views.terms, name="terms"),
-	url(r'^rankings/$', views.rankings, name='rankings'),
-	
-	url(r'^getProfilePicture/ (?P<user_id>\d+)/$', views.getProfilePicture, name='getProfilePicture'),
-	url(r'^getProjectPicture/ (?P<project_id>\d+)/$', views.getProjectPicture, name='getProjectPicture'),
-		
-	# DEVELOEPR HELP
-	url(r'^developerhelp/$', views.dhelp, name='dhelp'),
-)
+urlpatterns = [path('', views.index, name='index'),
+               path('signup/', views.signup_user, name="signup"),
+               path('login/', auth_views.LoginView.as_view(template_name='yalladevelop/login.html'), name="login"),
+               path('logout/', views.logout_user, name="logout"),
+               path('project/<int:project_id>/', views.showProject, name='showProject'),
+               path('profile/<int:profile_id>/', views.showProfile, name='showProfile'),
+               path('profile/', views.showProfile, name='showProfile'),
+               path('addproject/', views.addProject, name='addProject'),
+               path('forgotpassword/', views.forgotPassword, name='forgotPassword'),
+               path('profile_settings/', views.profileSettings, name='profileSettings'),
+
+               path('userorcompany/', views.userorcompany, name="userorcompany"),
+               path('user-signup/', views.signup_user, name="signup_user"),
+               path('track/', views.track, name="track"),
+               path('company-signup/', views.signup_company, name="signup_company"),
+
+               path('search_skills/', views.search_skills, name="search_skills"),
+               path('search_skills/<int:skill_id>/', views.search_skills, name="search_skills"),
+
+               # Functions dispatcher
+               path('project/(<int:project_id>/likeProject', views.likeProject, name='likeProject'),
+               path('project/(<int:project_id>/helpProject', views.helpProject, name='helpProject'),
+               path('project/(<int:project_id>/donate/', views.donate, name='donate'),
+               path('project/(<int:project_id>/promote/', views.promote, name='promote'),
+
+               path('project/<int:project_id>/edit', views.editProject, name='editProject'),
+
+               path('post_comment/', views.postComment, name='postComment'),
+               path('user_upload/', views.user_upload, name='user_upload'),
+
+               # Static Pages Dispatcher
+               path('about/', views.about, name="about"),
+               path('contact/', views.contact, name="contact"),
+               path('explore/', views.explore, name="explore"),
+               path('allprojects/', views.allprojects, name="allprojects"),
+               path('allusers/', views.allusers, name="allusers"),
+               path('allcompanies/', views.allcompanies, name="allcompanies"),
+               path('faq/', views.faq, name="faq"),
+               path('help/', views.help, name="help"),
+               path('privacy/', views.privacy, name="privacy"),
+               path('sitemap/', views.sitemap, name="sitemap"),
+               path('terms/', views.terms, name="terms"),
+               path('rankings/', views.rankings, name='rankings'),
+
+               path('getProfilePicture/<int:user_id>/', views.getProfilePicture,
+                    name='getProfilePicture'),
+               path('getProjectPicture/<int:project_id>/', views.getProjectPicture,
+                    name='getProjectPicture'),
+
+               # DEVELOEPR HELP
+               path('developerhelp/', views.dhelp, name='dhelp'),
+               ]
